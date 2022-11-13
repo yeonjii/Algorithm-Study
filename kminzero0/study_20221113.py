@@ -166,3 +166,41 @@ class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         import itertools
         return list(itertools.permutations(nums))
+    
+    
+# LeetCode - Subsets
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        answer = []
+        visited = []
+
+        def dfs(n):
+            answer.append(visited[:])
+            
+            for i in range(n, len(nums)):
+                visited.append(nums[i])
+                dfs(i+1)
+                visited.pop()
+            
+        dfs(0)
+        return answer
+
+    
+# LeetCode - Palindrom Partitioning
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        answer = []
+        visited = []
+
+        def dfs(i):
+            if i == len(s):
+                answer.append(visited[:])
+                return
+
+            for j in range(i+1, len(s)+1):
+                if s[i:j] == s[i:j][::-1]:
+                    visited.append(s[i:j])
+                    dfs(j)
+                    visited.pop()
+        dfs(0)
+        return answer
