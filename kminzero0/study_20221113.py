@@ -120,3 +120,25 @@ class Solution:
                     if dfs(r,c,0): 
                         return True
         return False
+
+# LeetCode - combination Sum
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        answer = []
+        visited = []
+        
+        def dfs(i, total):
+            if total > target or i >= len(candidates) :
+                return
+
+            if target == total:
+                answer.append(visited[:])
+                return
+            
+            visited.append(candidates[i])
+            dfs(i, total + candidates[i])
+            visited.remove(candidates[i])
+            dfs(i+1, total)
+        
+        dfs(0, 0)
+        return answer
