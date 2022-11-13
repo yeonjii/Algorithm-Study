@@ -142,3 +142,27 @@ class Solution:
         
         dfs(0, 0)
         return answer
+
+# LeetCode = Permutation
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        answer = []
+        visited = []
+
+        def dfs(nums):
+            if not nums:
+                answer.append(visited[:])
+                return
+                
+            for i in range(len(nums)):
+                visited.append(nums[i])
+                dfs(nums[:i]+nums[i+1:])
+                visited.remove(nums[i])
+        
+        dfs(nums)
+        return answer
+    
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        import itertools
+        return list(itertools.permutations(nums))
